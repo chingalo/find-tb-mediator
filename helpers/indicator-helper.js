@@ -27,22 +27,52 @@ async function getIndicatorsByGroup(serverUrl, headers, indicatorGroupId) {
     })
 }
 
+function getNumeratorsAndDenominatorsDataElementsByIndicators(indicators) {
+    const denominatorDataElements = _.flatMapDeep(_.map(indicators, indicator => {
+        const {
+            denominator
+        } = indicator;
+        return getUidsFromIndicatorExpression(denominator)
+    })).filter(onlyUniqueItemsOnArray);
+
+    const numeratorDataElements = _.filter(_.flatMapDeep(_.map(indicators, indicator => {
+        const {
+            numerator
+        } = indicator;
+        return getUidsFromIndicatorExpression(numerator)
+    })).filter(onlyUniqueItemsOnArray), de => {
+        return denominatorDataElements.indexOf(de) === -1
+    })
+
+    return {
+        numeratorDataElements,
+        denominatorDataElements
+    }
+}
+
+function onlyUniqueItemsOnArray(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
 function getUidsFromIndicatorExpression(expression) {
     var uids = [];
     var matchRegrex = /(\{.*?\})/gi;
-    expression.match(matchRegrex).forEach(function (value) {
-        uids = uids.concat(
-            value
-            .replace('{', ':separator:')
-            .replace('}', ':separator:')
-            .split(':separator:')
-            .filter(content => content.length > 0)
-        );
-    });
+    if (expression.match(matchRegrex)) {
+        expression.match(matchRegrex).forEach(function (value) {
+            uids = uids.concat(
+                value
+                .replace('{', ':separator:')
+                .replace('}', ':separator:')
+                .split(':separator:')
+                .filter(content => content.length > 0)
+            );
+        });
+    }
     return uids;
 }
 
 module.exports = {
     getIndicatorsByGroup,
+    getNumeratorsAndDenominatorsDataElementsByIndicators
 
 }
