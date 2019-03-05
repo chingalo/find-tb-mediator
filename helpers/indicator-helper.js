@@ -28,21 +28,22 @@ async function getIndicatorsByGroup(serverUrl, headers, indicatorGroupId) {
 }
 
 function getNumeratorsAndDenominatorsDataElementsByIndicators(indicators) {
-    const denominatorDataElements = _.flatMapDeep(_.map(indicators, indicator => {
-        const {
-            denominator
-        } = indicator;
-        return getUidsFromIndicatorExpression(denominator)
-    })).filter(onlyUniqueItemsOnArray);
 
-    const numeratorDataElements = _.filter(_.flatMapDeep(_.map(indicators, indicator => {
+    const numeratorDataElements = _.flatMapDeep(_.map(indicators, indicator => {
         const {
             numerator
         } = indicator;
         return getUidsFromIndicatorExpression(numerator)
+    })).filter(onlyUniqueItemsOnArray);
+
+    const denominatorDataElements = _.filter(_.flatMapDeep(_.map(indicators, indicator => {
+        const {
+            denominator
+        } = indicator;
+        return getUidsFromIndicatorExpression(denominator)
     })).filter(onlyUniqueItemsOnArray), de => {
-        return denominatorDataElements.indexOf(de) === -1
-    })
+        return numeratorDataElements.indexOf(de) === -1
+    });
 
     return {
         numeratorDataElements,

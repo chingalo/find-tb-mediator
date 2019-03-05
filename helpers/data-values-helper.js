@@ -32,12 +32,12 @@ async function uploadDataValuesToTheServer(serverUrl, headers, payLoad) {
     });
 }
 
-async function getDataValueSetsForGivenYear(dataElements, orgUnit, periods, start, end) {
+async function getDataValueSetsForGivenYear(dataElementIds, orgUnitId, periods, start, end) {
     return new Promise(resolve => {
         const dataValues = [];
-        for (const dataElement of dataElements) {
+        for (const dataElementId of dataElementIds) {
             for (const period of periods) {
-                const dataValue = getDataValueObject(dataElement, period, orgUnit, start, end);
+                const dataValue = getDataValueObject(dataElementId, period, orgUnitId, start, end);
                 dataValues.push(dataValue)
             }
         }
@@ -47,12 +47,12 @@ async function getDataValueSetsForGivenYear(dataElements, orgUnit, periods, star
     })
 }
 
-function getDataValueObject(dataElement, period, orgUnit, start, end) {
+function getDataValueObject(dataElementId, period, orgUnitId, start, end) {
     const value = (start && end) ? _.random(start, end) : _.random(20, 50);
     return {
-        'dataElement': `${dataElement}`,
+        'dataElement': `${dataElementId}`,
         'period': `${period}`,
-        'orgUnit': `${orgUnit}`,
+        'orgUnit': `${orgUnitId}`,
         'categoryOptionCombo': '',
         'attributeOptionCombo': '',
         'value': `${value}`,
