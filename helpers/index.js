@@ -17,6 +17,14 @@ const {
     getYearsForRandomData
 } = require('./periods-helper');
 
+const {
+    getRandomDataElementValues
+} = require('./program-helper');
+
+const {
+    getRandomEvent
+} = require('./event-helper');
+
 
 module.exports = {
     getIndicatorsByGroup,
@@ -25,5 +33,7 @@ module.exports = {
     getDataValueSetsForGivenYear,
     uploadDataValuesToTheServer,
     getMonthInIsoFormat,
-    getYearsForRandomData
+    getYearsForRandomData,
+    getRandomDataElementValues,
+    getRandomEvent
 }
