@@ -1,12 +1,9 @@
-const _ = require('lodash');
-
 function getRandomDataElementValues(program) {
     const dataValues = [];
     const mapper = getDataValuesMapper()[program];
     Object.keys(mapper).map(dataElement => {
         const possibleValues = mapper[dataElement];
-        const index = _.random(0, possibleValues.length);
-        const value = possibleValues[index];
+        const value = possibleValues[Math.floor(Math.random() * possibleValues.length)];
         dataValues.push({
             dataElement,
             value
