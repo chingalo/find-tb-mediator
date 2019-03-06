@@ -22,7 +22,8 @@ const {
 } = require('./program-helper');
 
 const {
-    getRandomEvent
+    getRandomEvent,
+    uploadRandomEvents
 } = require('./event-helper');
 
 
@@ -35,5 +36,6 @@ module.exports = {
     getMonthInIsoFormat,
     getYearsForRandomData,
     getRandomDataElementValues,
-    getRandomEvent
+    getRandomEvent,
+    uploadRandomEvents
 }
