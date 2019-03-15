@@ -13,12 +13,12 @@ const headers = {
 };
 const serverUrl = 'https://amr.dhis2.site/cdp_cx3';
 //Ngelehun CHC : DiszpKrYNg8
-//
-//const organisationUnitIds = ["DiszpKrYNg8", "g8upMTyEZGZ"];
+
 const organisationUnitIds = getOus();
 const program = "PI7qwgoIpq8";
 
-startApp();
+//startApp();
+//deleteEventByOuIds(organisationUnitIds);
 
 async function startApp() {
     const eventsData = _.chunk(getSampleEventPayLoad(program), 100);
@@ -43,10 +43,15 @@ async function startApp() {
             ignored
         }))
     }
-    // await deleteEvetns()
 }
 
-async function deleteEvetns(ouId) {
+async function deleteEventByOuIds(ouIds) {
+    for (const ouId of ouIds) {
+        await deleteEvents(ouId)
+    }
+}
+
+async function deleteEvents(ouId) {
     console.log(`Loading events`);
     const events = await getEventData(serverUrl, headers, program, ouId);
     console.log(events.length);

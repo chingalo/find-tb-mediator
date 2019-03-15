@@ -133,7 +133,8 @@ function getEventData(serverUrl, headers, programId, ouid) {
 
 function getEventDataByProgram(programId) {
     const data = {
-        "PI7qwgoIpq8": [{
+        "PI7qwgoIpq8": 
+        [{
                 "EdOZNERIYoY": "A2",
                 "GMAytcZ8rSS": 624994,
                 "iub3GujHXio": "121222",
