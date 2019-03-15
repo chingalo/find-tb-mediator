@@ -21,7 +21,7 @@ const program = "PI7qwgoIpq8";
 startApp();
 
 async function startApp() {
-    const eventsData = _.chunk(getSampleEventPayLoad(program), 50);
+    const eventsData = _.chunk(getSampleEventPayLoad(program), 100);
     for (const events of eventsData) {
         console.log(`Uploading ${events.length} events`);
         const {

@@ -77,7 +77,8 @@ function getSampleEventPayLoad(programId) {
         const dataValues = [];
         // randomize event date as well as error date
         const eventDate = getEventDate();
-        const hour = _.random(0, 23);
+        let hour = _.random(0, 23);
+        hour = hour > 9 ? hour : `0${hour}`;
         const minutes = _.random(10, 59);
         const eventDateTime = `${eventDate} ${hour}:${minutes}`;
         Object.keys(data).map(key => {
