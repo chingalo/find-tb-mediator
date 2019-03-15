@@ -18,11 +18,9 @@ const {
 } = require('./periods-helper');
 
 const {
-    getRandomDataElementValues
-} = require('./program-helper');
-
-const {
-    getRandomEvent,
+    getEventData,
+    deleteEventById,
+    getSampleEventPayLoad,
     uploadRandomEvents
 } = require('./event-helper');
 
@@ -35,7 +33,8 @@ module.exports = {
     uploadDataValuesToTheServer,
     getMonthInIsoFormat,
     getYearsForRandomData,
-    getRandomDataElementValues,
-    getRandomEvent,
+    getEventData,
+    deleteEventById,
+    getSampleEventPayLoad,
     uploadRandomEvents
 }
