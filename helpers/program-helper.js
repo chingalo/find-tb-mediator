@@ -32,7 +32,33 @@ function getDataValuesMapper() {
             "ZNwpWM0xDtS": ["2019-03-06T12:39:44.648Z", "2018-03-06T12:39:44.648Z", "2018-03-06T12:39:44.648Z"]
         }
     }
+
+
 }
+
+function getEventDate(errorDate) {
+    const eventDate = errorDate.trim().split(" ")[0].split("/").reverse().join("-") || new Date().toISOString().split("T")[0];;
+    return eventDate
+}
+
+function getNewObject() {
+    var newData = []
+    var data = []
+    for (const d of data) {
+        const errorDate = d["Error datetime"];
+        const eventDate = getEventDate(errorDate);
+        newData = newData.concat({
+            ...d,
+            eventDate,
+            completedDate: eventDate
+        })
+
+    }
+
+    console.log(JSON.stringify(newData))
+}
+
+getNewObject()
 
 module.exports = {
     getRandomDataElementValues
